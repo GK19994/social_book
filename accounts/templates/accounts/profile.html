@@ -1,19 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Profile</title>
+{% extends 'accounts/base.html' %}
 
-</head>
-<body>
-<h1>Welcome {{name}}</h1>
-{% if messages %}
-    {% for message in messages %}
-        <small {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}
-        </small>
-    {% endfor %}
-{% endif %}
-<a href="{% url 'logout' %}">Logout</a>
-</body>
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Welcome, {{name}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="row align-items-center">
+        {% comment %} <div class="col-md-6 col-lg-7">
+            <img src="{% static 'vendors/images/login-page-img.png' %}" alt="">
+        </div> {% endcomment %}
+    </div>
+</div>
+{% endblock %}

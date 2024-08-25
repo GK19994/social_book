@@ -1,0 +1,110 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Dashboard{% endblock %}</title>
+
+    <!-- Load static template tag -->
+    {% load static %}
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'src/plugins/dropzone/src/dropzone.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu" id="hamburger-menu"></div>  <!-- The Hamburger menu -->
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+            <div class="header-search">
+                <form>
+                    <!-- Search form content -->
+                </form>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="login-menu">
+                <ul>
+                    <li><a class="btn btn-outline-danger mt-3" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-sidebar">
+        <!-- Include the right-sidebar content -->
+    </div>
+
+    <div class="left-side-bar" id="sidebar">
+        <div class="brand-logo">
+            <a href="#">
+                <img src="{% static 'vendors/images/deskapp-logo.svg' %}" alt="" class="dark-logo">
+                <img src="{% static 'vendors/images/deskapp-logo-white.svg' %}" alt="" class="light-logo">
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+                <i class="ion-close-round"></i>
+            </div>
+        </div>
+        <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li class="dropdown">
+                        <a href="{% url 'profile' %}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{% url 'authors_and_sellers' %}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-edit-2"></span><span class="mtext">Authors and Sellers</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{% url 'upload_books' %}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-upload"></span><span class="mtext">Upload Books</span>
+                        </a>
+                    </li>
+                    <!-- Add more sidebar items as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu-overlay"></div>
+
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="footer-wrap pd-20 mb-20 card-box">
+                DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="{% static 'vendors/scripts/core.js' %}"></script>
+    <script src="{% static 'vendors/scripts/script.min.js' %}"></script>
+    <script src="{% static 'vendors/scripts/process.js' %}"></script>
+    <script src="{% static 'vendors/scripts/layout-settings.js' %}"></script>
+    <script src="{% static 'src/plugins/dropzone/src/dropzone.js' %}"></script>
+
+    <script>
+        // JavaScript to toggle the sidebar visibility
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            } else {
+                sidebar.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
