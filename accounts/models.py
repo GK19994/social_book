@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
     public_visibility = models.BooleanField(default=True)
     birth_year = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
 
     @property
     def age(self):

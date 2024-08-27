@@ -1,0 +1,48 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Data Wrangling Results{% endblock %}
+
+{% block content %}
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Data Wrangling Results</h4>
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <h2>Original DataFrame</h2>
+            <div class="table-responsive">
+                {{ original_df|safe }}
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <h2>Filtered DataFrame (Year > 2000)</h2>
+            <div class="table-responsive">
+                {{ filtered_df|safe }}
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <h2>Filtered DataFrame with Columns 'Author' and 'Book Title'</h2>
+            <div class="table-responsive">
+                {{ filtered_columns_df|safe }}
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <h2>Replace Year Published with 'Modern' if after 2000, else 'Classic'</h2>
+            <div class="table-responsive">
+                {{ replaced_df|safe }}
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <h2>Appended DataFrame</h2>
+            <div class="table-responsive">
+                {{ appended_df|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

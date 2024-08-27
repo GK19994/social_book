@@ -9,7 +9,8 @@ from django_filters.views import FilterView
 import django_filters
 from .models import UploadedFile
 from .forms import UploadFileForm
-
+import pandas as pd
+import numpy as np
 
 # Create your views here.
 
@@ -88,3 +89,44 @@ def upload_books(request):
 def uploaded_files(request):
     files = UploadedFile.objects.filter(user=request.user)
     return render(request, 'accounts/uploaded_files.html', {'files': files})
+
+
+def data_wrangling_view(request):
+    # Step 2: Create a pandas DataFrame (size: 10x3) from a list of values/dictionary
+    data = {
+        'Author': ['Author1', 'Author2', 'Author3', 'Author4', 'Author5', 
+                   'Author6', 'Author7', 'Author8', 'Author9', 'Author10'],
+        'Book Title': ['Book1', 'Book2', 'Book3', 'Book4', 'Book5', 
+                       'Book6', 'Book7', 'Book8', 'Book9', 'Book10'],
+        'Year Published': [2001, 2003, 1999, 2015, 2020, 1987, 1995, 2010, 2008, 2022]
+    }
+    df = pd.DataFrame(data)
+
+    # Step 3: Filter DataFrame based on a Year Published greater than 2000 and print
+    filtered_df = df[df['Year Published'] > 2000]
+
+    # Step 4: Filter DataFrame with columns 'Author' and 'Book Title' and print
+    filtered_columns_df = df[['Author', 'Book Title']]
+
+    # Step 5: Replace Year Published with 'Modern' if after 2000, else 'Classic'
+    df['Year Category'] = df['Year Published'].apply(lambda x: 'Modern' if x > 2000 else 'Classic')
+
+    # Step 6: Create another DataFrame and append it to the original one
+    additional_data = {
+        'Author': ['Author11', 'Author12'],
+        'Book Title': ['Book11', 'Book12'],
+        'Year Published': [1990, 2021]
+    }
+    df2 = pd.DataFrame(additional_data)
+    appended_df = pd.concat([df, df2], ignore_index=True)
+
+    # Passing data to the template
+    context = {
+        'original_df': df.to_html(index=False),
+        'filtered_df': filtered_df.to_html(index=False),
+        'filtered_columns_df': filtered_columns_df.to_html(index=False),
+        'replaced_df': df.to_html(index=False),
+        'appended_df': appended_df.to_html(index=False),
+    }
+
+    return render(request, 'accounts/data_wrangling.html', context)
