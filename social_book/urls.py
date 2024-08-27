@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('auth/', include('djoser.urls')),
-    # path('auth/', include('djoser.urls.authtoken')),  # If using token authentication
+    path('auth/', include('djoser.urls.authtoken')),  # If using token authentication
     path('api-auth/', include('rest_framework.urls')),  # For browsable API login
 ]

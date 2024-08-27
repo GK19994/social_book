@@ -92,7 +92,7 @@ def uploaded_files(request):
 
 
 def data_wrangling_view(request):
-    # Step 2: Create a pandas DataFrame (size: 10x3) from a list of values/dictionary
+    #Create a pandas DataFrame (size: 10x3) from a list of values/dictionary
     data = {
         'Author': ['Author1', 'Author2', 'Author3', 'Author4', 'Author5', 
                    'Author6', 'Author7', 'Author8', 'Author9', 'Author10'],
@@ -102,16 +102,16 @@ def data_wrangling_view(request):
     }
     df = pd.DataFrame(data)
 
-    # Step 3: Filter DataFrame based on a Year Published greater than 2000 and print
+    #Filter DataFrame based on a Year Published greater than 2000 and print
     filtered_df = df[df['Year Published'] > 2000]
 
-    # Step 4: Filter DataFrame with columns 'Author' and 'Book Title' and print
+    #Filter DataFrame with columns 'Author' and 'Book Title' and print
     filtered_columns_df = df[['Author', 'Book Title']]
 
-    # Step 5: Replace Year Published with 'Modern' if after 2000, else 'Classic'
+    #Replace Year Published with 'Modern' if after 2000, else 'Classic'
     df['Year Category'] = df['Year Published'].apply(lambda x: 'Modern' if x > 2000 else 'Classic')
 
-    # Step 6: Create another DataFrame and append it to the original one
+    #Create another DataFrame and append it to the original one
     additional_data = {
         'Author': ['Author11', 'Author12'],
         'Book Title': ['Book11', 'Book12'],

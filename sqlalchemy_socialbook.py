@@ -13,7 +13,7 @@ def fetch_data():
     with engine.connect() as connection:
         # Reflect the table you want to query
         metadata = MetaData()
-        my_table = Table('users', metadata, autoload_with=engine)
+        my_table = Table('accounts_customuser', metadata, autoload_with=engine)
         
         # Build a SELECT query
         query = select(my_table)
